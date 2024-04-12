@@ -2,6 +2,7 @@ package program;
 
 import java.util.Arrays;
 import java.util.Random;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,14 +12,18 @@ import javax.swing.JOptionPane;
 public class View extends javax.swing.JFrame {
 
     private int numerosdesordenados[];
-    
-    
-  
+
     public View() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         jTextArea1.setLineWrap(true);
+        jTextArea2.setLineWrap(true);
+        btnBurbuja.setEnabled(false);
+        btnSeleccion.setEnabled(false);
+        btnInsercion.setEnabled(false);
+        btnQuickSort.setEnabled(false);
+        btnBorrar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,6 +49,7 @@ public class View extends javax.swing.JFrame {
         btnInsercion = new javax.swing.JButton();
         btnQuickSort = new javax.swing.JButton();
         btnSeleccion = new javax.swing.JButton();
+        btnBorrar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
 
@@ -189,15 +195,43 @@ public class View extends javax.swing.JFrame {
 
         btnBurbuja.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBurbuja.setText("Burbuja");
+        btnBurbuja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBurbujaActionPerformed(evt);
+            }
+        });
 
         btnInsercion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnInsercion.setText("Insercion");
+        btnInsercion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsercionActionPerformed(evt);
+            }
+        });
 
         btnQuickSort.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnQuickSort.setText("QuickSort");
+        btnQuickSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuickSortActionPerformed(evt);
+            }
+        });
 
         btnSeleccion.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnSeleccion.setText("Seleccion");
+        btnSeleccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionActionPerformed(evt);
+            }
+        });
+
+        btnBorrar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -212,17 +246,20 @@ public class View extends javax.swing.JFrame {
                 .addComponent(btnInsercion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnQuickSort)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(btnBorrar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
+                .addGap(3, 3, 3)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBurbuja)
                     .addComponent(btnInsercion)
                     .addComponent(btnQuickSort)
-                    .addComponent(btnSeleccion))
+                    .addComponent(btnSeleccion)
+                    .addComponent(btnBorrar))
                 .addGap(5, 5, 5))
         );
 
@@ -241,9 +278,9 @@ public class View extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(534, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE)
                         .addGap(5, 5, 5))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -252,7 +289,7 @@ public class View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -337,7 +374,7 @@ public class View extends javax.swing.JFrame {
 
                 if (inicio >= 1 && fin <= 1000) {
 
-                     numerosdesordenados = new int[cantidad];
+                    numerosdesordenados = new int[cantidad];
 
                     Random r = new Random();
                     for (int i = 0; i < cantidad; i++) {
@@ -345,6 +382,12 @@ public class View extends javax.swing.JFrame {
                     }
 
                     jTextArea1.setText(Arrays.toString(numerosdesordenados));
+
+                    btnBurbuja.setEnabled(true);
+                    btnSeleccion.setEnabled(true);
+                    btnInsercion.setEnabled(true);
+                    btnQuickSort.setEnabled(true);  
+                    jTextArea2.setText("");
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Rango de Numeros de 1 a 1000 !!!", "Campos vacios", JOptionPane.INFORMATION_MESSAGE);
@@ -362,6 +405,143 @@ public class View extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnGenerarActionPerformed
+
+    public void numerosOrdenados(int ordenar[]) {
+        jTextArea2.setText(Arrays.toString(ordenar));
+    }
+
+    private void btnBurbujaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBurbujaActionPerformed
+
+        int aux;
+        //clonar el array principal al array burbuja para no alterar el principal
+        int burbuja[] = numerosdesordenados.clone();
+
+        for (int i = 0; i < burbuja.length - 1; i++) {
+
+            for (int j = 0; j < burbuja.length - 1; j++) {
+
+                if (burbuja[j] > burbuja[j + 1]) {
+                    aux = burbuja[j + 1];
+                    burbuja[j + 1] = burbuja[j];
+                    burbuja[j] = aux;
+                }
+
+            }
+        }
+
+        numerosOrdenados(burbuja);
+
+        apagarBoton(btnSeleccion, btnInsercion, btnQuickSort);
+        btnBorrar.setEnabled(true);
+    }//GEN-LAST:event_btnBurbujaActionPerformed
+
+    private void btnSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionActionPerformed
+
+        int aux, menor;
+        int seleccion[] = numerosdesordenados.clone();
+
+        for (int i = 0; i < seleccion.length; i++) {
+            menor = i;
+            for (int j = i + 1; j < seleccion.length; j++) {
+                if (seleccion[j] < seleccion[menor]) {
+                    menor = j;
+                }
+            }
+            aux = seleccion[i];
+            seleccion[i] = seleccion[menor];
+            seleccion[menor] = aux;
+        }
+        
+        numerosOrdenados(seleccion);
+        
+        apagarBoton(btnBurbuja, btnInsercion, btnQuickSort);
+        btnBorrar.setEnabled(true);
+    }//GEN-LAST:event_btnSeleccionActionPerformed
+
+    private void btnInsercionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsercionActionPerformed
+
+        int aux, posicion;
+        int insercion[] = numerosdesordenados.clone();
+
+        for (int i = 0; i < insercion.length; i++) {
+            posicion = i;
+            aux = insercion[i];
+
+            while ((posicion > 0) && (insercion[posicion - 1] > aux)) {
+                insercion[posicion] = insercion[posicion - 1];
+                posicion--;
+            }
+            insercion[posicion] = aux;
+        }
+
+        numerosOrdenados(insercion);
+        
+        apagarBoton(btnBurbuja, btnSeleccion, btnQuickSort);
+        btnBorrar.setEnabled(true);
+    }//GEN-LAST:event_btnInsercionActionPerformed
+
+    private void btnQuickSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickSortActionPerformed
+        int quicksort[] = numerosdesordenados.clone();
+
+        algoritmoQuickSort(quicksort, 0, quicksort.length - 1);
+
+        numerosOrdenados(quicksort);
+        
+        apagarBoton(btnBurbuja, btnSeleccion, btnInsercion);
+        btnBorrar.setEnabled(true);
+    }//GEN-LAST:event_btnQuickSortActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        jTextArea2.setText("");
+        btnBurbuja.setEnabled(true);
+        btnSeleccion.setEnabled(true);
+        btnInsercion.setEnabled(true); 
+        btnQuickSort.setEnabled(true);
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
+    public void apagarBoton(JButton a, JButton b, JButton c){
+        a.setEnabled(false);
+        b.setEnabled(false);
+        c.setEnabled(false);        
+    }
+    
+    
+    public void algoritmoQuickSort(int quickSort[], int inicio, int fin) {
+        int pivote = quickSort[inicio];
+
+
+        int i = inicio;
+        int j = fin;
+        int aux;
+
+        while (i < j) {
+
+            while (quickSort[i] <= pivote && i < j) {
+                i++;
+            }
+
+            while (quickSort[j] > pivote) {
+                j--;
+            }
+
+            if (i < j) {
+                aux = quickSort[i];
+                quickSort[i] = quickSort[j];
+                quickSort[j] = aux;
+            }
+
+        }
+        quickSort[inicio] = quickSort[j];
+        quickSort[j] = pivote;
+        
+        if (inicio < j - 1) {
+            algoritmoQuickSort(quickSort, inicio, j - 1);
+        }
+        if (j + 1 < fin) {
+            algoritmoQuickSort(quickSort, j + 1, fin);
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -399,6 +579,7 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBurbuja;
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnInsercion;
